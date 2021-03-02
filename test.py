@@ -1,3 +1,5 @@
+import scraper
+
 loginid = "loginid"
 passwd = "passwd"
 
