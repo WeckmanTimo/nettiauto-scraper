@@ -1,4 +1,5 @@
 import scraper
+import os
 
 loginid = "loginid"
 passwd = "passwd"
@@ -20,12 +21,12 @@ for make in car_make:
                 X_tmp = X_tmp.loc[:, ~X_tmp.columns.str.contains('^Unnamed')]
             else:
                 try:
-                    driver, X_tmp = scrape_car_data(driver, car_make = make, car_model = model, car_year = year)
+                    driver, X_tmp = scraper.scrape_car_data(driver, car_make = make, car_model = model, car_year = year)
                 except ValueError:
                     pass
                 except NameError:
-                    driver = login_webpage(loginid, passwd)
-                    driver, X_tmp = scrape_car_data(driver, car_make = make, car_model = model, car_year = year)
+                    driver = scraper.login_webpage(loginid, passwd)
+                    driver, X_tmp = scraper.scrape_car_data(driver, car_make = make, car_model = model, car_year = year)
                 X_tmp.to_csv('%s_%s_%s.csv' % (make, model, year))
             X.append(X_tmp)
 
